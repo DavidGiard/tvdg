@@ -1,0 +1,75 @@
+﻿<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+    <script src="https://code.angularjs.org/1.4.8/angular.js" data-semver="1.4.8" data-require="angular.js@1.4.8"></script>
+    <link href="./css/style.css" rel="stylesheet" />
+    <script src="./js/episodeController.js"></script>
+</head>
+<body ng-controller="episodeController">
+    <h1>Technology and Friends </h1>
+    <div>
+        Search: <input type="text" ng-model="searchText">
+    </div>
+    <div>
+        yearFilter={{yearFilter}}
+    </div>
+    <div>
+        Year: <br>
+        <select ng-model="yearFilter" ngChange="filterByYear">
+            <option value="2016">2016</option>
+            <option value="2015">2015</option>
+            <option value="2014">2014</option>
+            <option value="2013">2013</option>
+        </select>
+
+    </div>
+    <div>
+        <div>
+            Order by:
+        </div>
+        <select ng-model="episodeSortOrder">
+            <option value="episodeNumber">Episode#</option>
+            <option value="title">Title</option>
+            <option value="dateRecorded">Date</option>
+        </select>
+        <div>
+            <input type="radio" name="AscDesc" value="+" ng-model="sortDirection" checked>Ascending
+            <br>
+            <input type="radio" name="AscDesc" value="-" ng-model="sortDirection">Descending
+        </div>
+    </div>
+    <div>
+        Maximum Episodes to display:
+        <input type="text" ng-model="maxEpisodesDisplayed">
+        {{sortDirection+episodeSortOrder}}
+    </div>
+    <div ng-repeat="episode in episodes | orderBy:sortDirection+episodeSortOrder | limitTo: maxEpisodesDisplayed | filter: searchText">
+        <div style="background-color: azure; width:800px">
+            <h2>
+                Episode {{episode.episodeNumber}}:          <br />
+                {{episode.title}}
+            </h2>
+            <div>
+                {{episode.description}}
+            </div>
+            <iframe width="640" height="360" frameborder="0" allowfullscreen="" ng-src="{{GetUrl(episode.videoUrl)}}"></iframe>
+            <div>
+                <i>
+                    Recorded <span ng-show="episode.dateRecorded">{{episode.dateRecorded | date:'fullDate'}}</span> in {{episode.recordingLocation}}
+                </i>
+            </div>
+            <div>
+                <i>
+                    Published: {{episode.publishDate | date:'fullDate'}}
+                </i>
+            </div>
+        </div>
+    </div>
+    <div>
+        <hr /> {{episodes}}
+        <hr /> {{episodes.length}}
+
+    </div>
+
+</body>
+</html>
