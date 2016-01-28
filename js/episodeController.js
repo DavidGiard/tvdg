@@ -6,7 +6,7 @@ app.controller("episodeController", function ($scope, $http, $sce, $location) {
 
     $scope.episodeSortOrder = "id";
     $scope.sortDirection = "-";
-    $scope.maxEpisodesDisplayed = 50;
+    $scope.maxEpisodesDisplayed = 8;
 
     //var dateFilter = '$filter=month(publishDate) eq 5 and year(publishDate) eq 2014';
 

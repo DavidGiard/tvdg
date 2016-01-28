@@ -1,2 +1,19 @@
 ﻿body {
 }
+
+.stripedrow{
+    margin-left:5px;
+    margin-right:10px;
+    margin-bottom: 15px;
+    align-content: center; 
+    padding: 10px;
+
+}
+.stripedrow:nth-child(even){
+    background-color: white;
+    color: black; 
+}
+
+.text-left{
+    margin-bottom: 15px;
+}
